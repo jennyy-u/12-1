@@ -1,11 +1,19 @@
-void circle(int x, int y) {
+void square(int x, int y) {
   pushMatrix();
   translate(x, y);
-  strokeWeight(2);
-  noFill();
-  circle(0, 0, 160);
+  rectMode(CENTER);
+  square(0, 0, 140);
   popMatrix();
+}
+
+
+void squareIn(int x, int y) {
   
+  pushMatrix();
+  translate(x, y);
+  rectMode(CENTER);
+  square(0, 0, 50);
+  popMatrix();
   
   //next button
   strokeWeight(3);
@@ -21,6 +29,4 @@ void circle(int x, int y) {
   circle(80, 400, 80);
   fill(0);
   text("back", 80, 400);
-  
-  
 }
