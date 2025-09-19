@@ -2,17 +2,34 @@ import processing.javafx.*;
 
 //jenny yu
 //block 1-4
-//september
+//september 18, 2025
 
 
-//global variables
+//colour variables
 color lightPink = #f597ba;
 color darkPink = #ee4d64;
 color red = #de0001;
+color orange = #f18e11;
+color yellow = #f9f349;
+color green = #a0fa56;
+color blue = #88cdfa;
+color purple = #ec1df2;
+color pink = #e87799;
 
 
+//font variables
+PFont cheri;
+PFont cheriClear;
+PFont toffee;
+PFont bubblegum;
 
-int randomNum = (int) random (0, 10); //generating random integer **from 0-9 (no decimal)
+
+//random puzzle
+int randomWord = (int) random (0, 7); //generating random integer **from 0-9 (no decimal)
+int randomColor = (int) random (0, 7);
+
+String[] words = {"RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
+color[] colors = {red, orange, yellow, green, blue, purple, pink};
 
 
 //mode framework
@@ -20,6 +37,7 @@ int mode;
 final int INTRO = 0;
 final int GAME = 1;
 final int GAMEOVER = 2;
+
 
 //gif variables
 PImage[] gif;
@@ -31,8 +49,13 @@ void setup() {
   size(800, 800, FX2D);
   background(255);
 
+  mode = GAME;
 
-  mode = INTRO;
+  //font
+  cheri = createFont("CHERI___.TTF", 50);
+  cheriClear = createFont("CHERL___.TTF", 80);
+  toffee = createFont("Sweet Toffee.ttf", 40);
+  bubblegum = createFont ("Bubblegum.ttf", 60);
 
   //gif setup
   numOfFrames = 48;
@@ -44,6 +67,8 @@ void setup() {
     gF++;
   }
 }
+
+
 
 void draw() {
   if (mode == INTRO) {
@@ -57,9 +82,10 @@ void draw() {
 
 
 void mouseReleased() {
-  if (mouseX > 300 && mouseX < 500 && mouseY > 650 && mouseY < 720) {
+  if (mouseX > 300 && mouseX < 500 && mouseY > 630 && mouseY < 700 && mode == INTRO) {
     mode = 1;
   }
-  
-  
+  if (mouseX > 300 && mouseX < 500 && mouseY > 630 && mouseY < 700 && mode == GAMEOVER) {
+    mode = 0;
+  }
 }
