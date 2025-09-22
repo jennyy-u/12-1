@@ -16,16 +16,18 @@ color blue = #88cdfa;
 color purple = #ec1df2;
 color pink = #e87799;
 
-
 //font variables
 PFont cheri;
 PFont cheriClear;
 PFont toffee;
 PFont bubblegum;
 
+//score
+int score;
+
 
 //random puzzle
-int randomWord = (int) random (0, 7); //generating random integer **from 0-9 (no decimal)
+int randomWord = (int) random (0, 7); //generating random integer from 0-6 (no decimal)
 int randomColor = (int) random (0, 7);
 
 String[] words = {"RED", "ORANGE", "YELLOW", "GREEN", "BLUE", "PURPLE", "PINK"};
@@ -38,11 +40,11 @@ final int INTRO = 0;
 final int GAME = 1;
 final int GAMEOVER = 2;
 
-
 //gif variables
 PImage[] gif;
 int numOfFrames;
 int f;
+
 
 
 void setup() {
@@ -50,6 +52,8 @@ void setup() {
   background(255);
 
   mode = GAME;
+
+  score = 0;
 
   //font
   cheri = createFont("CHERI___.TTF", 50);
@@ -84,8 +88,24 @@ void draw() {
 void mouseReleased() {
   if (mouseX > 300 && mouseX < 500 && mouseY > 630 && mouseY < 700 && mode == INTRO) {
     mode = 1;
-  }
-  if (mouseX > 300 && mouseX < 500 && mouseY > 630 && mouseY < 700 && mode == GAMEOVER) {
+    score = 0;
+  } else if (mouseX > 300 && mouseX < 500 && mouseY > 630 && mouseY < 700 && mode == GAMEOVER) {
     mode = 0;
+  } else if (mouseX > 0 && mouseX < width/2 && mouseY > 0 && mouseY < height && mode == GAME) {
+    if (randomColor == randomWord) {
+      mode = 2;
+    } else if (randomColor != randomWord) {
+      score = score + 1;
+      randomWord = (int) random (0, 7);
+      randomColor = (int) random (0, 7);
+    }
+  } else if (mouseX > width/2 && mouseX < width && mouseY > 0 && mouseY < height && mode == GAME) {
+    if (randomColor == randomWord) {
+      score = score + 1;
+      randomWord = (int) random (0, 7);
+      randomColor = (int) random (0, 7);
+    } else if (randomColor != randomWord) {
+      mode = 2;
+    }
   }
 }
